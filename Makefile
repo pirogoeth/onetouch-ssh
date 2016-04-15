@@ -1,2 +1,8 @@
-install:
+install: dist-prep
 	go install ./...
+
+dist-prep: test
+	go fmt ./...
+
+test:
+	go test ./...

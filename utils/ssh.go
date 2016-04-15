@@ -7,6 +7,17 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+func ValidatePublicKey(pubkey string) (bool, error) {
+	byteString := []byte(pubkey)
+
+	_, _, _, _, err := ssh.ParseAuthorizedKey(byteString)
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
+
 // Helper function to get the fingerprint of a SSH public key
 func PublicKeyFingerprint(pubkey string) (string, string) {
 	byteString := []byte(pubkey)
